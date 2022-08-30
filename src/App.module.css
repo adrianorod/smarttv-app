@@ -1,0 +1,12 @@
+.appContainer {
+  text-align: center;
+}
+
+.mainContent {
+  padding: 0 40px;
+  overflow: hidden;
+}
+
+.rails {
+  transition: transform .3s ease-in-out;
+}

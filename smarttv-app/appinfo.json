@@ -1,0 +1,10 @@
+{
+  "id": "",
+  "version": "0.0.1",
+  "vendor": "My Company",
+  "type": "web",
+  "main": "index.html",
+  "title": "SmartTV App",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png"
+}

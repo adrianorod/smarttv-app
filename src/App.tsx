@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import getRailsService, { Rail } from './services/get-rails'
+import RailComponent from './components/rail/rail.component';
+import useNavigation from './hooks/use-navigation';
+
+import styles from './App.module.css';
+import logo from './logo.png'
 
 function App() {
+  const [rails, setRails] = useState<Rail[]>([])
+
+  const { focusedIndex } = useNavigation({ isActive: true, direction: 'vertical', limit: rails.length - 1 })
+
+  useEffect(() => {
+    const getRails = async () => {
+      const data = await getRailsService()
+      setRails(data)
+    }
+
+    getRails()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className={styles.appContainer}>
+      <header>
+        <img src={logo} alt="Star Wars" />
       </header>
+      <main className={styles.mainContent}>
+        <div className={styles.rails} style={{ transform: `translateY(-${425 * focusedIndex}px)` }}>
+          {rails.map((rail, index) => <RailComponent rail={rail} isFocused={focusedIndex === index} />)}
+        </div>
+      </main>
     </div>
   );
 }
